@@ -33,6 +33,7 @@ class PostDetail extends Component {
   }
   _voteForComment = (option, comment) => {
     this.props.dispatch(voteExistingComment(option, comment));
+    window.location.reload();
   }
   render() {
     const { posts, comments, match } = this.props;
