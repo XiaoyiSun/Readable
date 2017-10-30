@@ -23,7 +23,7 @@ const App = () => (
     />
     <Route
       exact
-      path="/post/:id"
+      path="/:category/:id"
       render={({ match }) => <PostDetail match={match} />}
     />
     <Route
