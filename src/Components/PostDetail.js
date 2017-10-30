@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import {
-  fetchAllPosts,
   fetchPostComments,
   deleteExistingPost,
   deleteExistingComment,
@@ -16,7 +15,6 @@ class PostDetail extends Component {
   }
   componentDidMount() {
     const { dispatch, match } = this.props;
-    dispatch(fetchAllPosts());
     dispatch(fetchPostComments(match.params.id));
   }
   _deletePost = () => {

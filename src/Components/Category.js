@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchAllCategories, fetchAllPosts } from '../Actions';
 
 class Category extends Component {
   state = {
     sortQuery: 'voteScore',
-  }
-  componentDidMount() {
-    this.props.dispatch(fetchAllCategories());
-    this.props.dispatch(fetchAllPosts());
   }
   render() {
     const { categories, posts, match } = this.props;

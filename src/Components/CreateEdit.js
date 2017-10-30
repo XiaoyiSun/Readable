@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import uuid4 from 'uuid';
-import { fetchAllCategories, postNewPost, editExistingPost } from '../Actions';
+import { postNewPost, editExistingPost } from '../Actions';
 
 class CreateEdit extends Component {
   state = {
@@ -17,7 +17,6 @@ class CreateEdit extends Component {
     fireRedirect: false,
   }
   componentDidMount() {
-    this.props.dispatch(fetchAllCategories());
     if (this.props.match.params.id) {
       fetch(`http://localhost:5001/posts/${this.props.match.params.id}`, { headers: { 'Authorization': 'whatever-you-want' } })
         .then(result => result.json())

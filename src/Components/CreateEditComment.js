@@ -74,7 +74,7 @@ class CreateEditComment extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        {this.state.fireRedirect && <Redirect to={`/post/${this.props.match.params.parentId}`} />}
+        {this.state.fireRedirect && <Redirect to="/" />}
       </div>
     );
   }
