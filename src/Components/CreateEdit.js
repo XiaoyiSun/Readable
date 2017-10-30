@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import uuid4 from 'uuid';
-import { postNewPost, editExistingPost } from '../Actions';
+import { fetchAllCategories, postNewPost, editExistingPost } from '../Actions';
 
 class CreateEdit extends Component {
   state = {
@@ -17,6 +17,7 @@ class CreateEdit extends Component {
     fireRedirect: false,
   }
   componentDidMount() {
+    this.props.dispatch(fetchAllCategories());
     if (this.props.match.params.id) {
       fetch(`http://localhost:5001/posts/${this.props.match.params.id}`, { headers: { 'Authorization': 'whatever-you-want' } })
         .then(result => result.json())
@@ -72,6 +73,18 @@ class CreateEdit extends Component {
               onChange={this.handleInputChange}
             />
           </label>
+          {this.props.categories && <label>
+            Categories:
+            <select
+              name="category"
+              value={this.state.category}
+              onChange={this.handleInputChange}
+            >
+              {this.props.categories.map((category) => (
+                <option value={category.name} key={category.name}>{category.name}</option>
+              ))}
+            </select>
+          </label>}
           <input type="submit" value="Submit" />
         </form>
         {this.state.fireRedirect && <Redirect to="/" />}
@@ -80,8 +93,9 @@ class CreateEdit extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ categories, posts }) {
   return {
+    categories,
     posts,
   };
 }
