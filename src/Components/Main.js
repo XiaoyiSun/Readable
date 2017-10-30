@@ -39,7 +39,7 @@ class Main extends Component {
           {showingPosts
             .filter(post => !post.deleted)
             .map(post => (
-              <li key={post.id}><Link to={`/${post.category}/${post.id}`}>{post.title}</Link></li>
+              <li key={post.id}><Link to={`/post-detail/${post.category}/${post.id}`}>{post.title}</Link></li>
             ))
           }
         </ul>

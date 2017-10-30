@@ -23,14 +23,16 @@ const App = () => (
     />
     <Route
       exact
-      path="/:category/:id"
+      path="/post-detail/:category/:id"
       render={({ match }) => <PostDetail match={match} />}
     />
     <Route
+      exact
       path="/edit/:id?"
       render={({ match }) => <CreateEdit match={match} />}
     />
     <Route
+      exact
       path="/editComment/:parentId/:id?"
       render={({ match }) => <CreateEditComment match={match} />}
     />
