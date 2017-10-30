@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { fetchAllCategories, fetchAllPosts } from '../Actions';
 
 class Category extends Component {
   state = {
     sortQuery: 'voteScore',
+  }
+  componentDidMount() {
+    this.props.dispatch(fetchAllCategories());
+    this.props.dispatch(fetchAllPosts());
   }
   render() {
     const { categories, posts, match } = this.props;
@@ -25,7 +30,7 @@ class Category extends Component {
             .filter(post => post.category === `${match.params.id}`)
             .filter(post => !post.deleted)
             .map(post => (
-              <li key={post.id}><Link to={`/post/${post.id}`}>{post.title}</Link></li>
+              <li key={post.id}><Link to={`/post-detail/${post.category}/${post.id}`}>{post.title}</Link></li>
             ))
           }
         </ul>
