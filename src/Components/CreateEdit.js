@@ -18,16 +18,19 @@ class CreateEdit extends Component {
   }
   componentDidMount() {
     if (this.props.match.params.id) {
-      const post = this.props.posts.find(post => post.id === this.props.match.params.id);
-      this.setState({
-        id: post.id,
-        title: post.title,
-        body: post.body,
-        author: post.author,
-        category: post.category,
-        voteScore: post.voteScore,
-        deleted: post.deleted,
-      });
+      fetch(`http://localhost:5001/posts/${this.props.match.params.id}`, { headers: { 'Authorization': 'whatever-you-want' } })
+        .then(result => result.json())
+        .then((post) => {
+          this.setState({
+            id: post.id,
+            title: post.title,
+            body: post.body,
+            author: post.author,
+            category: post.category,
+            voteScore: post.voteScore,
+            deleted: post.deleted,
+          });
+        });
     } else {
       this.setState({ id: uuid4() });
     }
