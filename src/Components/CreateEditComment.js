@@ -69,6 +69,7 @@ class CreateEditComment extends Component {
               name="author"
               value={this.state.author}
               onChange={this.handleInputChange}
+              readOnly={this.props.match.params.id}
             />
           </label>
           <input type="submit" value="Submit" />
