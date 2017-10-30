@@ -73,6 +73,16 @@ class CreateEdit extends Component {
               onChange={this.handleInputChange}
             />
           </label>
+          <label>
+            Author:
+            <input
+              type="text"
+              name="author"
+              value={this.state.author}
+              onChange={this.handleInputChange}
+              readOnly={this.props.match.params.id}
+            />
+          </label>
           {this.props.categories && <label>
             Categories:
             <select
