@@ -12,6 +12,24 @@ export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
 
+export async function fetchPostAndComments() {
+  const result = await fetch('http://localhost:5001/posts', { headers: { 'Authorization': 'whatever-you-want' } });
+  const posts = await result.json();
+  // console.log(posts);
+  const validPosts = posts.filter(post => !post.deleted);
+  const commentPromises = validPosts.map(post => getNumberOfComments(post.id));
+  return Promise.all(commentPromises);
+}
+
+export async function getNumberOfComments(postId) {
+  const result = await fetch(`http://localhost:5001/posts/${postId}/comments`, { headers: { 'Authorization': 'whatever-you-want' } });
+  const comments = await result.json();
+  return {
+    count: comments.length,
+    id: postId,
+  };
+}
+
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
   payload: {

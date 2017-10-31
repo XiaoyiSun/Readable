@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { deleteExistingPost, voteExistingPost } from '../Actions';
+import { deleteExistingPost, voteExistingPost, fetchPostAndComments } from '../Actions';
 
 class Main extends Component {
   state = {
     sortQuery: 'voteScore',
+    commentsNumber: [],
+  }
+  componentDidMount() {
+    fetchPostAndComments()
+      .then(data => this.setState({ commentsNumber: data }));
   }
   _deletePost = (id) => {
     if(window.confirm('Detele the post?')) {
@@ -42,6 +47,7 @@ class Main extends Component {
               <p>Created time: {new Date(post.timestamp).toString()}</p>
               <p>Current Score: {post.voteScore}</p>
               <p>Author: {post.author}</p>
+              <p>Total {this.state.commentsNumber.find(p => p.id === post.id) && this.state.commentsNumber.find(p => p.id === post.id).count} comments</p>
               <Link to={`/edit/${post.id}`}><button>Edit</button></Link>
               <button onClick={() => this._deletePost(post.id)}>Delete</button>
               <button onClick={() => this._voteForPost('upVote', post)}>Up Vote</button>
