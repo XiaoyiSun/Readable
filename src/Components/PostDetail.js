@@ -37,6 +37,23 @@ class PostDetail extends Component {
   }
   render() {
     const { posts, comments, match } = this.props;
+    if (!posts.find(post => post.id === `${match.params.id}`)) {
+      return (
+        <div>
+          <p>404</p>
+          <p>There is no post with the id.</p>
+          <Link to='/'><button>Back to Home</button></Link>
+        </div>
+      );
+    } else if (posts.find(post => post.id === `${match.params.id}`).deleted) {
+      return (
+        <div>
+          <p>404</p>
+          <p>The post was deleted.</p>
+          <Link to='/'><button>Back to Home</button></Link>
+        </div>
+      );
+    }
     return (
       <div>
         {posts
