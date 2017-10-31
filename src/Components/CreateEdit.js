@@ -12,7 +12,7 @@ class CreateEdit extends Component {
     body: '',
     author: '',
     category: 'react',
-    voteScore: 0,
+    voteScore: 1,
     deleted: false,
     fireRedirect: false,
   }
