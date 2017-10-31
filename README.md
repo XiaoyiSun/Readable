@@ -1,3 +1,15 @@
+To run the app:
+
+* Start the API server (provided separately)
+    - `cd api-server`
+    - `npm install`
+    - `node server`
+* In another terminal window, start the pre-scaffolded Create React App project
+    - `cd frontend`
+    - `npm install`
+    - `npm start`
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
